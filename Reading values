@@ -1,0 +1,22 @@
+echo "Enter your name: "
+read NAME
+
+echo "I knew your name is $NAME"
+
+
+echo "Now, "
+
+read -p 'Your username:' USR
+read -sp 'Gimme a password:' PSWD
+
+echo "logging in............"
+
+
+echo
+echo
+
+echo "login succesful!"
+
+echo
+echo "-----------------------------------------------------------------------------------------------------------------------"
+echo "                                               ***********************                                                 "
