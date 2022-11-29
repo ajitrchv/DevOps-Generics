@@ -12,7 +12,7 @@
       service:
               name: httpd
               state: started
-              enable: yes
+              enabled: yes
 
 
 - name: setup db server
@@ -27,6 +27,6 @@
       service:
               name: mariadb
               state: started
-              enable: yes
+              enabled: yes
 
 
