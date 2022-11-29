@@ -1,0 +1,24 @@
+web01 ansible_host=172.31.80.11 ansible_user=centos ansible_ssh_private_key_file=key.pem
+web02 ansible_host=172.31.88.167 ansible_user=centos ansible_ssh_private_key_file=key.pem
+db01 ansible_host=172.31.88.156 ansible_user=centos ansible_ssh_private_key_file=key.pem
+
+#------------defining groups ------------------------------------------------------------------
+
+[webservgp]
+web01
+web02
+
+[dbservgp]
+db01
+
+#------------ defining group of groups --------------------------------------------------------
+
+[dc_ohio:children]
+webservgp
+dbservgp
+
+
+#------------globally defining variable sfor a particular group --------------------------------
+[webservgp:vars]
+ansible_user=centos
+ansible_ssh_priavte_key_file=key.pem
