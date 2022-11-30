@@ -1,0 +1,25 @@
+- name: creating a new db
+  hosts: dbservgp
+  become: yes
+  tasks:
+
+        - name: installing MySQL server
+          yum:
+                 name: mariadb-server
+                 state: present
+
+        - name: installing depenencies
+          yum:
+                 name: MySQL-python
+                 state: present
+
+        - name: starting sql serv service
+          service:
+                  name: mariadb
+                  state: started
+                  enabled: yes
+
+        - name: setting up new db with name 'ans_db'
+          mysql_db:
+                 name: ans_db
+                 state: present
