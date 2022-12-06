@@ -1,0 +1,58 @@
+---
+- name: Provisioning on all machines.
+  hosts: all
+  become: yes
+  tasks:
+          - name: installing NTP on CentOS
+            yum:
+                    name: '{{item}}'
+                    state: present
+            when: ansible_distribution == 'CentOS'
+            loop:
+                    - ntp
+                    - wget
+                    - git
+                    - zip
+                    - unzip
+
+          - name: istalling NTP on ubuntu
+            apt:
+                    name: '{{item}}'
+                    state: present
+            when: ansible_distribution == 'Ubuntu'
+            loop:
+                    - ntp
+                    - wget
+                    - git
+                    - zip
+                    - unzip
+
+          - name: starting service in '{{ansible_os_family}}'
+            service:
+                    name: ntpd
+                    state: started
+                    enabled: yes
+            when: ansible_os_family == 'RedHat'
+
+          - name: starting service in '{{ansible_os_family}}'
+            service:
+                    name: ntp
+                    state: started
+                    enabled: yes
+            when: ansible_os_family == 'Debian'
+
+          - name: add usrs and group
+            group: 
+                    name: devops
+                    state: present
+
+          - name: adding user now
+            user:
+                        name: '{{item}}'
+                        state: present
+                        groups: devops
+            loop:
+                    - user1
+                    - user2
+                    - user3
+                    - user4
